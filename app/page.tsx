@@ -1,10 +1,13 @@
+"use client"
 import { Grid } from "@/components/Grid";
-import Image from "next/image";
+import { useRef } from "react";
+
 
 export default function Home() {
+  const isVisualizationRunningRef = useRef(false)
   return (
     <main className="flex h-screen flex-col w-screen">
-      <Grid/>
+      <Grid isVisualizationRunningRef = {isVisualizationRunningRef}/>
     </main>
   );
 }

@@ -9,6 +9,10 @@ const END_TILE_STYLE = TILE_STYLE + " bg-red-600";
 const WALL_TILE_STYLE = TILE_STYLE + " bg-gray-200";
 const PATH_TILE_STYLE = TILE_STYLE + " bg-green-600";
 
+interface MouseFunction {
+    (row: number, col: number): void 
+}
+
 export default function Tile({
     row,
     col,
@@ -16,7 +20,10 @@ export default function Tile({
     isEnd,
     isPath,
     isWall,
-    isTraversed
+    isTraversed,
+    handleMouseDown,
+    handleMouseUp,
+    handleMouseEnter,
 }:{
     row: number;
     col: number;
@@ -25,6 +32,9 @@ export default function Tile({
     isPath: boolean;
     isWall: boolean;
     isTraversed: boolean;
+    handleMouseDown: MouseFunction,
+    handleMouseUp: MouseFunction,
+    handleMouseEnter: MouseFunction,
 }){
     let tileTyleStyle;
 
@@ -46,10 +56,14 @@ export default function Tile({
         row === MAX_ROWS - 1 ? "border-b" : col === 0 ? "border-l" : "";
     const edgeStyle = row === MAX_ROWS - 1 && col === 0 ? "border-l" : "";
 
-
     return (
         
-        <div className={twMerge(tileTyleStyle, borderStyle, edgeStyle)} id={`${row}-${col}`}/>
+        <div 
+            className={twMerge(tileTyleStyle, borderStyle, edgeStyle)} id={`${row}-${col}`}
+            onMouseDown={()=> handleMouseDown(row,col)}
+            onMouseEnter={()=>handleMouseEnter(row,col)}
+            onMouseUp={()=>handleMouseUp(row,col)}
+        />
         
     )
 }
