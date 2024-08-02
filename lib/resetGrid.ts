@@ -4,6 +4,7 @@ import { GridType, TileType } from "./types";
 
 const TILE_STYLE =
   "lg:w-[17px] md:w-[15px] xs:w-[8px] w-[7px] lg:h-[17px] md:h-[15px] xs:h-[8px] h-[7px] border-t border-r border-sky-200";
+const END_TILE_STYLE = TILE_STYLE + " bg-red-600";
 
 export const resetGrid = ({
     grid,
@@ -23,7 +24,6 @@ export const resetGrid = ({
             tile.isTraversed = false;
             tile.isWall = false
             tile.parent = null
-
             if(!isEqual(tile,startTile) && !isEqual(tile,endTile)){
                 const tileElement = document.getElementById(`${tile.row}-${tile.col}`);
 
@@ -41,4 +41,5 @@ export const resetGrid = ({
             }
         }
     }
+    document.getElementById(`${endTile.row}-${endTile.col}`)!.className = END_TILE_STYLE;
 }

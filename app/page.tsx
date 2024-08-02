@@ -8,7 +8,7 @@ export default function Home() {
   const isVisualizationRunningRef = useRef(false)
   return (
     <main className="flex h-screen flex-col w-screen">
-      <Navbar/>
+      <Navbar isVisualizationRunningRef={isVisualizationRunningRef}/>
       <Grid isVisualizationRunningRef = {isVisualizationRunningRef}/>
     </main>
   );

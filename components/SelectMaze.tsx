@@ -18,11 +18,16 @@ import { runMazeAlgorithm } from "@/lib/runMazeAlgorithm"
 import { useTile } from "@/hooks/useTile"
 import { useSpeed } from "@/hooks/useSpeed"
 
-export function SelectMaze() {
+export function SelectMaze({
+  isDisabled,
+  setIsDisabled
+}:{
+  isDisabled: boolean,
+  setIsDisabled: (isDisabled: boolean)=> void
+}) {
   const {grid, maze, setMaze, setGrid, setIsGraphVisualized} = usePathFinding()
   const {startTile, endTile} = useTile()
   const {speed} = useSpeed()
-  const [isDisabled, setIsDisabled] = React.useState(false)  
   const handleGenerateMaze = (maze: MazeType)=>{
     if(maze=='NONE'){
         setMaze(maze);
@@ -39,13 +44,13 @@ export function SelectMaze() {
     setIsGraphVisualized(false);
 }
   return (
-    <Select value={maze} onValueChange={(e)=>{
-      handleGenerateMaze(e.valueOf() as MazeType)
-    }}>
+    <Select onValueChange={(e)=>{
+      handleGenerateMaze(e as MazeType)
+    }} disabled={isDisabled}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a maze type" />
       </SelectTrigger>
-      <SelectContent defaultValue='NONE'>
+      <SelectContent >
         <SelectGroup>
           <SelectLabel>Mazes</SelectLabel>
           <SelectItem value="NONE">No Maze</SelectItem>
